@@ -44,4 +44,8 @@ public class Image {
             }
         }
     }
+
+    public LUV[][] getLUVMatrix() {
+        return LUVMatrix;
+    }
 }
