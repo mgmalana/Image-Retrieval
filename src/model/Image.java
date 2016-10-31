@@ -1,5 +1,6 @@
 package model;
 
+import com.sun.image.codec.jpeg.ImageFormatException;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageDecoder;
 import imageReader.CieConvert;
@@ -16,8 +17,9 @@ import java.io.IOException;
 public class Image {
     private LUV[][] LUVMatrix; //[x][y]
     private File file;
+    private double similarity; //similarity to the query
 
-    public Image(File file) throws IOException {
+    public Image(File file) throws IOException, ImageFormatException {
         this.file = file;
 
         FileInputStream in = new FileInputStream(file);
@@ -47,5 +49,17 @@ public class Image {
 
     public LUV[][] getLUVMatrix() {
         return LUVMatrix;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public double getSimilarity() {
+        return similarity;
+    }
+
+    public void setSimilarity(double similarity) {
+        this.similarity = similarity;
     }
 }

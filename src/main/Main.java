@@ -1,4 +1,4 @@
-package imageRetrieval;
+package main;
 
 import model.Image;
 
@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Main {
 
@@ -25,11 +26,24 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        File selectedFile = main.initFileChooser();
+        //File selectedFile = main.initFileChooser();
+
+        File selectedFile = new File("/Users/mgmalana/Documents/Image-Retrieval/images/0.jpg");
+
         try {
 
             if(selectedFile != null){
                 Image queryImage = new Image(selectedFile);
+                ImageRetrieve imageRetrieve = new ImageRetrieve();
+
+                File[] similarImages = imageRetrieve.getSimilarImages(queryImage, selectedFile.getParentFile(),
+                        ImageRetrieve.imageRetrieval.COLORHISTOGRAM);
+
+                System.out.println("Top " + similarImages.length + " similar images are ");
+                for (File file: similarImages){
+                    System.out.print(file.getName() +", ");
+                }
+
             } else {
                 return;
             }

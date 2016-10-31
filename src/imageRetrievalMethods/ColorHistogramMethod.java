@@ -1,4 +1,4 @@
-package imageRetrieval;
+package imageRetrievalMethods;
 
 import model.Image;
 import model.LUV;
@@ -10,12 +10,12 @@ import java.util.Set;
 /**
  * Created by mgmalana on 30/10/2016.
  */
-public class ColorHistogramMethod {
-    public double THRESHOLD = 0.005;
+public class ColorHistogramMethod extends  ImageRetrievalMethod{
+    public double THRESHOLD = 0.0005; //TODO: Adjust this. masyadong maliit ata.
 
     public double getSimilarity(Image query, Image toCompare){
         LUV[][] queryMatrix = query.getLUVMatrix();
-        LUV[][] toCompareMatrix = query.getLUVMatrix();
+        LUV[][] toCompareMatrix = toCompare.getLUVMatrix();
         LUV[] colorArrayList = getArrayColors(queryMatrix, toCompareMatrix);
 
         double[] queryNH = getNormalizedHistogram(colorArrayList, queryMatrix);
@@ -35,8 +35,7 @@ public class ColorHistogramMethod {
                 thresholdCounter++;
             }
         }
-
-        return (1/thresholdCounter) * sim;
+        return (1.0/thresholdCounter) * sim;
     }
 
     private double[] getNormalizedHistogram(LUV[] colorArrayList, LUV[][] matrix) {
@@ -67,13 +66,13 @@ public class ColorHistogramMethod {
     private LUV[] getArrayColors(LUV[][] queryMatrix, LUV[][] toCompareMatrix) {
         Set<LUV> colorArray = new HashSet<>();
         for (int i = 0; i < queryMatrix.length; i++) {
-            for (int j = 0; j < queryMatrix.length; j++) {
+            for (int j = 0; j < queryMatrix[i].length; j++) {
                 colorArray.add(queryMatrix[i][j]);
             }
         }
 
         for (int i = 0; i < toCompareMatrix.length; i++) {
-            for (int j = 0; j < toCompareMatrix.length; j++) {
+            for (int j = 0; j < toCompareMatrix[i].length; j++) {
                 colorArray.add(toCompareMatrix[i][j]);
             }
         }
