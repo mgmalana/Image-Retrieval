@@ -36,7 +36,7 @@ public class Main {
                 ImageRetrieve imageRetrieve = new ImageRetrieve();
 
                 File[] similarImages = imageRetrieve.getSimilarImages(queryImage, selectedFile.getParentFile(),
-                        ImageRetrieve.imageRetrieval.COLORHISTOGRAM);
+                        ImageRetrieve.imageRetrieval.CENTERING);
 
                 System.out.println("Top " + similarImages.length + " similar images are ");
                 for (File file: similarImages){

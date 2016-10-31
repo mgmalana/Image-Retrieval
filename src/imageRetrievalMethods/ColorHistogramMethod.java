@@ -13,7 +13,6 @@ import java.util.Set;
  */
 public class ColorHistogramMethod extends  ImageRetrievalMethod{
     public double THRESHOLD = 0.005;
-    public static int NUM_COLOR_INDEX = 159;
 
     public double getSimilarity(Image query, Image toCompare){
         double[] queryNH = getNormalizedHistogram(query.getLUVMatrix());
