@@ -15,7 +15,7 @@ import java.io.IOException;
  * Created by mgmalana on 30/10/2016.
  */
 public class Image {
-    private LUV[][] LUVMatrix; //[x][y]
+    private int[][] LUVMatrix; //[x][y]
     private File file;
     private double similarity; //similarity to the query
 
@@ -29,7 +29,7 @@ public class Image {
         JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(in);
         BufferedImage bufferedImage = decoder.decodeAsBufferedImage();
 
-        LUVMatrix = new LUV[bufferedImage.getWidth()][bufferedImage.getHeight()];
+        LUVMatrix = new int[bufferedImage.getWidth()][bufferedImage.getHeight()];
 
         //saves the luv values to the matrix
         for (int i = 0; i < LUVMatrix.length; i++){
@@ -42,12 +42,12 @@ public class Image {
                         colorModel.getGreen(rgbValue)/255.0,
                         colorModel.getBlue(rgbValue)/255.0);
 
-                LUVMatrix[i][j] = new LUV(colorCIE.L, colorCIE.u, colorCIE.v);
+                LUVMatrix[i][j] =colorCIE.IndexOf();
             }
         }
     }
 
-    public LUV[][] getLUVMatrix() {
+    public int[][] getLUVMatrix() {
         return LUVMatrix;
     }
 
