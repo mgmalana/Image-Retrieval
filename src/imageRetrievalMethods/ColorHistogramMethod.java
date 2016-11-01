@@ -14,19 +14,6 @@ import java.util.Set;
 public class ColorHistogramMethod extends  ImageRetrievalMethod{
     public double THRESHOLD = 0.005;
 
-    public double getDistance(Image query, Image toCompare) {
-        int distance = 0;
-        int[] queryH = getHistogram(query.getLUVMatrix());
-        int[] toCompareH = getHistogram(toCompare.getLUVMatrix());
-
-        for (int i = 0; i < NUM_COLOR_INDEX; i++){
-            distance+= Math.abs(queryH[i] - toCompareH[i]);
-        };
-
-        return distance;
-    }
-
-
     public double getSimilarity(Image query, Image toCompare){
         double[] queryNH = getNormalizedHistogram(query.getLUVMatrix());
         double[] toCompareNH = getNormalizedHistogram(toCompare.getLUVMatrix());
@@ -48,8 +35,10 @@ public class ColorHistogramMethod extends  ImageRetrievalMethod{
         return (1.0/thresholdCounter) * sim;
     }
 
-    private int[] getHistogram(int[][] matrix){
+    private double[] getNormalizedHistogram(int[][] matrix) {
+        double[] nhArray = new double[NUM_COLOR_INDEX];
         int[] histogramMap = new int[NUM_COLOR_INDEX];
+        double countElement = matrix.length * matrix[0].length;
 
         //traverses the matrix and increments the color counter
         for (int[] lArray: matrix) {
@@ -57,17 +46,6 @@ public class ColorHistogramMethod extends  ImageRetrievalMethod{
                 histogramMap[luv]++;
             }
         }
-
-        return histogramMap;
-    }
-
-
-    private double[] getNormalizedHistogram(int[][] matrix) {
-        double[] nhArray = new double[NUM_COLOR_INDEX];
-        int[] histogramMap = getHistogram(matrix);
-
-        double countElement = matrix.length * matrix[0].length;
-
 
         for (int i = 0; i < NUM_COLOR_INDEX; i++){
             nhArray[i] = histogramMap[i] / countElement;

@@ -8,5 +8,5 @@ import model.Image;
 public abstract class ImageRetrievalMethod {
     public static int NUM_COLOR_INDEX = 159;
 
-    public abstract double getDistance(Image query, Image toCompare);
+    public abstract double getSimilarity(Image query, Image toCompare);
 }
