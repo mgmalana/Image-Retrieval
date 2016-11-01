@@ -17,7 +17,7 @@ import java.io.IOException;
 public class Image {
     private int[][] LUVMatrix; //[x][y]
     private File file;
-    private double similarity; //similarity to the query
+    private double distance; //distance to the query
 
     public Image(File file) throws IOException, ImageFormatException {
         this.file = file;
@@ -55,11 +55,11 @@ public class Image {
         return file;
     }
 
-    public double getSimilarity() {
-        return similarity;
+    public double getDistance() {
+        return distance;
     }
 
-    public void setSimilarity(double similarity) {
-        this.similarity = similarity;
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }

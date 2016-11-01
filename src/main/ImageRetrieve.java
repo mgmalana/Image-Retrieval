@@ -39,10 +39,10 @@ public class ImageRetrieve {
             try {
                 Image toCompare = new Image(directory);
 
-                double sim = method.getSimilarity(queryImage, toCompare);
-                System.out.println("Similarity of " + queryImage.getFile().getName() + " and " + toCompare.getFile().getName()
+                double sim = method.getDistance(queryImage, toCompare);
+                System.out.println("Distance of " + queryImage.getFile().getName() + " and " + toCompare.getFile().getName()
                         + " is " + sim);
-                toCompare.setSimilarity(sim);
+                toCompare.setDistance(sim);
                 sortedImages.add(toCompare);
             } catch (ImageFormatException e) {
                 System.err.println(directory + " is not a JPEG file");
@@ -55,9 +55,9 @@ public class ImageRetrieve {
         sortedImages.sort(new Comparator<Image>() {
             @Override
             public int compare(Image o1, Image o2) { //comparator reversed
-                if (o1.getSimilarity() < o2.getSimilarity())
+                if (o1.getDistance() > o2.getDistance())
                     return 1;
-                else if (o1.getSimilarity() > o2.getSimilarity())
+                else if (o1.getDistance() < o2.getDistance())
                     return -1;
                 else
                     return 0;
