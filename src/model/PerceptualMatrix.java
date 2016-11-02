@@ -11,9 +11,9 @@ import java.util.Scanner;
  */
 public class PerceptualMatrix {
 
-    double[][] dmatrix;
+    private double[][] dmatrix;
 
-    private void readMatrix(){
+    public double[][] readMatrix(){
         File file = new File("/Users/Kate/IdeaProjects/Image-Retrieval/res/d-matrix.dat");
         dmatrix = new double[159][159];
         try {
@@ -37,24 +37,9 @@ public class PerceptualMatrix {
                 }
             } catch (FileNotFoundException e){
                 e.printStackTrace();}
+
+        return dmatrix;
     }
-
-
-    public static void main(String[] args){
-
-        PerceptualMatrix pm = new PerceptualMatrix();
-        pm.readMatrix();
-
-        for(int i = 0; i<159; i++){
-            for(int j = 0; j<159; j++){
-                System.out.print(pm.dmatrix[i][j] + "  ");
-            }
-            System.out.println();
-        }
-
-    }
-
-
 
 
 

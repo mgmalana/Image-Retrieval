@@ -3,6 +3,7 @@ package main;
 import com.sun.image.codec.jpeg.ImageFormatException;
 import imageRetrievalMethods.CenteringRefinement;
 import imageRetrievalMethods.ColorHistogramMethod;
+import imageRetrievalMethods.ColorHistogramPerceptual;
 import imageRetrievalMethods.ImageRetrievalMethod;
 import model.Image;
 
@@ -14,7 +15,7 @@ import java.util.*;
  * Created by mgmalana on 31/10/2016.
  */
 public class ImageRetrieve {
-    public enum imageRetrieval {COLORHISTOGRAM, CENTERING};
+    public enum imageRetrieval {COLORHISTOGRAM, CENTERING, PERCEPTUAL};
     public final static int NUM_RESULTS = 10;
 
     public File[] getSimilarImages(Image queryImage, File imagesFolder, imageRetrieval colorhistogram) {
@@ -29,6 +30,8 @@ public class ImageRetrieve {
             case CENTERING:
                 method = new CenteringRefinement();
                 break;
+            case PERCEPTUAL:
+                method = new ColorHistogramPerceptual();
             default:
                 method = new ColorHistogramMethod(); //default method
         }
