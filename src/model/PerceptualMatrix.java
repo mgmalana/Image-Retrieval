@@ -14,7 +14,7 @@ public class PerceptualMatrix {
     private double[][] dmatrix;
 
     public double[][] readMatrix(){
-        File file = new File("/Users/Kate/IdeaProjects/Image-Retrieval/res/d-matrix.dat");
+        File file = new File("res/d-matrix.dat");
         dmatrix = new double[159][159];
         try {
             Scanner scanner = new Scanner(file);

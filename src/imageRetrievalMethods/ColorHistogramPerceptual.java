@@ -9,7 +9,7 @@ import model.PerceptualMatrix;
 public class ColorHistogramPerceptual extends ImageRetrievalMethod {
     public double THRESHOLD = 0.005;
 
-    public double getDistance(Image query, Image toCompare){
+    public double getSimilarity(Image query, Image toCompare){
         PerceptualMatrix perceptualMatrix = new PerceptualMatrix();
         double[][] dMatrix = perceptualMatrix.readMatrix();
         double[] queryNH = getNormalizedHistogram(query.getLUVMatrix());
@@ -25,7 +25,6 @@ public class ColorHistogramPerceptual extends ImageRetrievalMethod {
 
 
     private double[] getSimExactCol(double[] queryNH, double[] toCompareNH){ //SimExactCol(Q, I, i)
-        double sim = 0;
         double[] simExactCol = new double[queryNH.length];
 
         for(int i = 0; i < queryNH.length; i++){

@@ -48,9 +48,9 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        //File selectedFile = main.initFileChooser();
+        File selectedFile = main.initFileChooser();
 
-        File selectedFile = new File("/Users/Kate/IdeaProjects/Image-Retrieval/images/0.jpg");
+//        File selectedFile = new File("/Users/Kate/IdeaProjects/Image-Retrieval/images/0.jpg");
 
         try {
 
@@ -59,7 +59,7 @@ public class Main {
                 ImageRetrieve imageRetrieve = new ImageRetrieve();
 
                 File[] similarImages = imageRetrieve.getSimilarImages(queryImage, selectedFile.getParentFile(),
-                        ImageRetrieve.imageRetrieval.COHERENCE);
+                        ImageRetrieve.imageRetrieval.PERCEPTUAL);
 
 //                System.out.println("Top " + similarImages.length + " similar images are ");
 //                for (File file: similarImages){
