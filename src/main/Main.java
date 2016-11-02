@@ -27,6 +27,7 @@ public class Main {
 
     public static void generateHTMLResults(File selectedFile, File [] similarImages){
         try{
+            File file = new File("Results.html");
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             bw.write("<html>");
             bw.write("<body>");
