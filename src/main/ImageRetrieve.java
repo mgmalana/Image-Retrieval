@@ -17,14 +17,13 @@ import java.util.*;
  */
 public class ImageRetrieve {
     public enum imageRetrieval {COLORHISTOGRAM, CENTERING, PERCEPTUAL, COHERENCE};
-    public final static int NUM_RESULTS = 10;
 
-    public File[] getSimilarImages(Image queryImage, File imagesFolder, imageRetrieval colorhistogram) {
+    public File[] getSimilarImages(Image queryImage, File imagesFolder, imageRetrieval colorhistogram, int numResults) {
         List<Image> sortedImages = new LinkedList<>();
         ImageRetrievalMethod method;
-        File[] sortedFilesArray = new File[NUM_RESULTS];
+        File[] sortedFilesArray = new File[numResults];
 
-        switch (colorhistogram){
+        switch (colorhistogram) {
             case COLORHISTOGRAM:
                 method = new ColorHistogramMethod();
                 break;
@@ -43,7 +42,7 @@ public class ImageRetrieve {
 
         File[] files = imagesFolder.listFiles();
 
-        for(File directory: files){
+        for (File directory : files) {
             try {
                 Image toCompare = new Image(directory);
 
@@ -74,11 +73,10 @@ public class ImageRetrieve {
 
         sortedImages.remove(queryImage);
 
-        for (int i = 0; i < NUM_RESULTS; i++){
+        for (int i = 0; i < numResults; i++) {
             sortedFilesArray[i] = sortedImages.get(i).getFile();
         }
 
-        ///////TODO: Remove query image from the sortedImages
         return sortedFilesArray;
     }
 }
