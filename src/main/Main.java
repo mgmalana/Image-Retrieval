@@ -89,8 +89,7 @@ public class Main {
     }
 
     private void testing() throws IOException {
-//        int[] filePerClass = {15 ,120, 202, 353, 471, 529, 657, 734, 859, 921};
-        int[] filePerClass = {15 ,120};
+        int[] filePerClass = {15 ,120, 202, 353, 471, 529, 657, 734, 859, 921};
         String directory = "images/";
         int numResults = 99;
 
@@ -132,10 +131,10 @@ public class Main {
             bw.write("<html>");
             bw.write("<body>");
             bw.write("<h2>Query: <h2><br>");
-            bw.write("<img src=\"" + selectedFile.getPath() + "\"</img><br>");
+            bw.write("<img src=\"../" + selectedFile.getPath() + "\"</img><br>");
             bw.write("<h2>Top " +  similarImages.length + "similar images found: </h2><br>");
             for (File f: similarImages){
-                bw.write("<img src=\"" + f.getPath() + "\"</img>" +
+                bw.write("<img src=\"../" + f.getPath() + "\"</img>" +
                         f.getName() +
                         "<hr>");
                 //System.out.print(f.getName() +", ");
@@ -143,8 +142,6 @@ public class Main {
             bw.write("</body>");
             bw.write("</html>");
             bw.close();
-
-            Desktop.getDesktop().browse(file.toURI());
         } catch (IOException e){
 
         }
