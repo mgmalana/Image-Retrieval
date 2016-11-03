@@ -52,7 +52,7 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        boolean isTesting = true;
+        boolean isTesting = false;
 
         if(isTesting) {
             try {
@@ -70,7 +70,7 @@ public class Main {
                     ImageRetrieve imageRetrieve = new ImageRetrieve();
 
                     File[] similarImages = imageRetrieve.getSimilarImages(queryImage, selectedFile.getParentFile(),
-                            ImageRetrieve.imageRetrieval.COHERENCE, 10);
+                            ImageRetrieve.imageRetrieval.CENTERCOHERENCE, 10);
 
     //                System.out.println("Top " + similarImages.length + " similar images are ");
     //                for (File file: similarImages){

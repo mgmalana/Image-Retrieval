@@ -7,7 +7,7 @@ import model.Image;
  * Used Manhattan distance for getting the distance between the histograms
  */
 public class CenteringRefinement extends ImageRetrievalMethod{
-    private static final double CENTER_PERCENTAGE = .75;
+    protected static final double CENTER_PERCENTAGE = .75;
 
     @Override
     public double getSimilarity(Image query, Image toCompare) {

@@ -12,7 +12,7 @@ public class ColorCoherence extends ImageRetrievalMethod{
     public final static int WEST = 1;
     public final static int NORTHWEST = 2;
 
-    private final static double THRESHOLD_MULT = 0.05;
+    protected final static double THRESHOLD_MULT = 0.05;
 
     @Override
     public double getSimilarity(Image query, Image toCompare) {
@@ -30,7 +30,7 @@ public class ColorCoherence extends ImageRetrievalMethod{
     }
 
     //returns coherence vector. int[a][b]. a: 0 if coherent, 1 if non coherent, b: color
-    private int[][] getCoherenceVector(int[][] matrix) {
+    protected int[][] getCoherenceVector(int[][] matrix) {
         ArrayList<Integer> parentChild = new ArrayList<>(); //index is the label. and the value is the parent
 
         int[][] coherentMap = getCoherentMapFirstPass(matrix, parentChild);
@@ -39,7 +39,7 @@ public class ColorCoherence extends ImageRetrievalMethod{
         return getColorCoherenceVector(matrix, coherentMap, parentChild.size());
     }
 
-    private int[][] getCoherentMapFirstPass(int[][] matrix, ArrayList<Integer> parentChild) {
+    protected int[][] getCoherentMapFirstPass(int[][] matrix, ArrayList<Integer> parentChild) {
         int [][] coherentLabelMap = new int[matrix.length][matrix[0].length]; //0 = means no label
         int currentLabelCounter = 0;
 
@@ -90,7 +90,7 @@ public class ColorCoherence extends ImageRetrievalMethod{
     }
 
     //merge some of the labels depending on the parentChild relationship
-    private void updateCoherentMapSecondPass(int[][] coherentLabelMap, ArrayList<Integer> parentChild) {
+    protected void updateCoherentMapSecondPass(int[][] coherentLabelMap, ArrayList<Integer> parentChild) {
         //change the parentChild so that child directly points to the main parent
         for (int i = 0; i < parentChild.size(); i++){
             int parent = parentChild.get(i);
@@ -109,7 +109,7 @@ public class ColorCoherence extends ImageRetrievalMethod{
         }
     }
 
-    private int[][] getColorCoherenceVector(int[][] matrix, int[][] coherentMap, int labelCount) {
+    protected int[][] getColorCoherenceVector(int[][] matrix, int[][] coherentMap, int labelCount) {
         int[] labelInstanceCounter = new int[labelCount];
         int[][] ccv = new int[NUM_COLOR_INDEX][2];
         int threshold = (int) (coherentMap.length * coherentMap[0].length * THRESHOLD_MULT);
