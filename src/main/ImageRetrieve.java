@@ -71,6 +71,9 @@ public class ImageRetrieve {
                     return 0;
             }
         });
+
+        sortedImages.remove(queryImage);
+
         for (int i = 0; i < NUM_RESULTS; i++){
             sortedFilesArray[i] = sortedImages.get(i).getFile();
         }

@@ -62,4 +62,20 @@ public class Image {
     public void setSimilarity(double similarity) {
         this.similarity = similarity;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Image image = (Image) o;
+
+        return file.equals(image.file);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return file.hashCode();
+    }
 }

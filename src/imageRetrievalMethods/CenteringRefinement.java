@@ -10,7 +10,7 @@ public class CenteringRefinement extends ImageRetrievalMethod{
     private static final double CENTER_PERCENTAGE = .75;
 
     @Override
-    public double getSimilarity(Image query, Image toCompare) { //TODO: more like distance not similarity. idk how to get it eh
+    public double getSimilarity(Image query, Image toCompare) {
         double distance = 0;
         int[] queryCenterBucket = getCenterCount(query.getLUVMatrix());
         int[] toCompareCenterBucket = getCenterCount(toCompare.getLUVMatrix());

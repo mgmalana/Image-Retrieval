@@ -4,6 +4,7 @@ import model.Image;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -35,15 +36,20 @@ public class Main {
             bw.write("<img src=\"" + selectedFile.getPath() + "\"</img><br>");
             bw.write("<h2>Top " +  similarImages.length + "similar images found: </h2><br>");
             for (File f: similarImages){
-                bw.write("<img src=\"" + f.getPath() + "\"</img><hr>");
+                bw.write("<img src=\"" + f.getPath() + "\"</img>" +
+                        f.getName() +
+                        "<hr>");
                 //System.out.print(f.getName() +", ");
             }
             bw.write("</body>");
             bw.write("</html>");
             bw.close();
+
+            Desktop.getDesktop().browse(file.toURI());
         } catch (IOException e){
 
         }
+
     }
 
     public static void main(String[] args) {
@@ -59,13 +65,14 @@ public class Main {
                 ImageRetrieve imageRetrieve = new ImageRetrieve();
 
                 File[] similarImages = imageRetrieve.getSimilarImages(queryImage, selectedFile.getParentFile(),
-                        ImageRetrieve.imageRetrieval.PERCEPTUAL);
+                        ImageRetrieve.imageRetrieval.COHERENCE);
 
 //                System.out.println("Top " + similarImages.length + " similar images are ");
 //                for (File file: similarImages){
 //                    System.out.print(file.getName() +", ");
 //                }
-                generateHTMLResults(selectedFile, similarImages);
+                generateHTMLResults(selectedFile, similarImages); //generates and open the html file
+
 
             } else {
                 return;
