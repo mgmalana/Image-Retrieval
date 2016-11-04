@@ -12,12 +12,31 @@ import java.util.*;
  * Created by mgmalana on 31/10/2016.
  */
 public class ImageRetrieve {
-    public enum imageRetrieval {COLORHISTOGRAM, CENTERING, PERCEPTUAL, COHERENCE, CENTERCOHERENCE};
+    public enum imageRetrieval {
+        COLORHISTOGRAM("Color Histogram"),
+        CENTERING ("Centering Refinement"),
+        PERCEPTUAL ("Perceptual Similarity incorporated"),
+        COHERENCE ("Color Coherence"),
+        CENTERCOHERENCE("Centering Refinement and Color Coherence");
+
+        private String name;
+        imageRetrieval(String name){
+            this.name = name;
+        }
+
+        // the toString just returns the given name
+        @Override
+        public String toString() {
+            return name;
+        }
+    };
 
     public File[] getSimilarImages(Image queryImage, File imagesFolder, imageRetrieval colorhistogram, int numResults) {
         List<Image> sortedImages = new LinkedList<>();
         ImageRetrievalMethod method;
         File[] sortedFilesArray = new File[numResults];
+
+        System.out.println("Method: " + colorhistogram);
 
         switch (colorhistogram) {
             case COLORHISTOGRAM:

@@ -63,28 +63,30 @@ public class Main {
         } else {
             File selectedFile = main.initFileChooser();
 
-            try {
+            main.doRetrieval(selectedFile, ImageRetrieve.imageRetrieval.CENTERCOHERENCE);
+        }
+    }
 
-                if(selectedFile != null){
-                    Image queryImage = new Image(selectedFile);
-                    ImageRetrieve imageRetrieve = new ImageRetrieve();
+    public void doRetrieval(File selectedFile, ImageRetrieve.imageRetrieval method) {
+        try {
 
-                    File[] similarImages = imageRetrieve.getSimilarImages(queryImage, selectedFile.getParentFile(),
-                            ImageRetrieve.imageRetrieval.CENTERCOHERENCE, 10);
+            if(selectedFile != null){
+                Image queryImage = new Image(selectedFile);
+                ImageRetrieve imageRetrieve = new ImageRetrieve();
 
-    //                System.out.println("Top " + similarImages.length + " similar images are ");
-    //                for (File file: similarImages){
-    //                    System.out.print(file.getName() +", ");
-    //                }
-                    generateHTMLResults(selectedFile, similarImages); //generates and open the html file
+                File[] similarImages = imageRetrieve.getSimilarImages(queryImage, selectedFile.getParentFile(),
+                        method, 10);
+
+                //                System.out.println("Top " + similarImages.length + " similar images are ");
+                //                for (File file: similarImages){
+                //                    System.out.print(file.getName() +", ");
+                //                }
+                generateHTMLResults(selectedFile, similarImages); //generates and open the html file
 
 
-                } else {
-                    return;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
